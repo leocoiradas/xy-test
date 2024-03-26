@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Uuid;
 
 return new class extends Migration
 {
@@ -12,11 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('(UUID())'));
-            $table->integer('employee_id');
+            $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['Completed', 'Pending', 'Blocked', 'In progress']);
+            $table->integer('employee_id');
             $table->timestamps();
         });
     }
