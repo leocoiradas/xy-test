@@ -24,7 +24,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('task.create');
     }
 
     /**
@@ -32,7 +32,16 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+        ]);
+        $task = new Task;
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->status = $request->status;
+        return redirect()->route('index');
     }
 
     /**
@@ -40,7 +49,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        
     }
 
     /**
@@ -48,7 +57,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('task.edit', compact('task'));
     }
 
     /**
@@ -56,7 +65,13 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+        ]);
+        $task->update($request->only('title', 'description', 'status'));
+        return redirect()->route('index');
     }
 
     /**
@@ -64,6 +79,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return redirect()->route('task.index');
     }
 }
