@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $fillable = ['name','email'];
+    protected $hidden = ['password', 'remember_token'];
     /**
      * Get all of the Task for the User
      *
