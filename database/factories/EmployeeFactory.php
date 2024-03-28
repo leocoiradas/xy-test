@@ -9,13 +9,12 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class EmployeeFactory extends Factory
 {
     /**
      * The current password being used by the factory.
      */
     protected static ?string $password;
-
     /**
      * Define the model's default state.
      *
@@ -23,12 +22,12 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $role = $this->faker->randomElement(['employee', 'super admin']);
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'role' => $role,
         ];
     }
 
