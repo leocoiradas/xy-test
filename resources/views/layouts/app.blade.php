@@ -12,13 +12,15 @@
 
         <!-- Styles -->
         
-         @vite('resources/css/app.css')
+         @vite(['resources/js/app.js','resources/css/app.css'])
     </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <main class="w-full h-full flex justify-center items-center">
-            <h1 class="text-3xl font-bold underline text-red-500">Hello world!</h1>
-        </main>
+    <body>
+            <div id="app">
+                @yield("content")
+            </div>
+        
     
        
+
     </body>
 </html>
